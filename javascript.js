@@ -52,4 +52,26 @@ let question = [{
     choiceC: "Nile",
     choiceD: "Hudson",
     correct: "C"
-}]
+}];
+
+// Quiz Render
+
+let lastQuestionIndex = questions.length - 1;
+let runningQuestionIndex = 0;
+
+function renderQuestions(){
+    let q = questions[runningQuestionIndex];
+    question.innerHTML = "<p>" + q.question + "</p>";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
+}
+
+// Progress Render
+
+function progressRender(){;
+    for(let qIndex = 0; qIndex <= lastQuestionIndex; qIndex++){
+        progress.innerHTML += "<div class = "prog" id=" + qIndex + "></div>"
+    }
+}
