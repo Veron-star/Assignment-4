@@ -72,6 +72,101 @@ function renderQuestions(){
 
 function progressRender(){;
     for(let qIndex = 0; qIndex <= lastQuestionIndex; qIndex++){
-        progress.innerHTML += "<div class = "prog" id=" + qIndex + "></div>"
+        progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
     }
+}
+
+function answerIsCorrect(){
+    document.getElementById(runningQuestionIndex).style.background = "green"
+}
+
+function answerIsWrong(){
+    document.getElementById(runningQuestionIndex).style.background = "red"
+}
+
+// Counter render
+
+const questionTime = 10; 
+const gaugeWidth = 150;
+let count = 0;
+const gaugeProgressUnit = gaugeWidth/questionTime;
+let timer = setInterval(counterRender,1000);
+
+function counterRender(){
+    if( count <= questionTime){
+        counterRender.innerHTML = count;
+        timeGauge.style.width = gaugeProgressUnit * count + "px";
+        count++;
+    }else{
+        count = 0;
+        answerIsWrong();
+        if( runningQuestionIndex < lastQuestionIndex){
+            runningQuestionIndex++;
+            questionRender();
+        }else{
+            clearInterval(timer);
+            scoreRender();
+        }
+    }
+}
+
+// checkAnswer();
+
+let score = 0;
+
+function checkAnswer(answer){
+    if(questions[runningQuestionIndex].correct == answer){
+        score++;
+        answerIsCorrect();
+    }else{
+        answerIsWrong();
+    }
+    if(runningQuestionIndex < lastQuestionIndex){
+        count = 0;
+        runningQuestionIndex++;
+        questionRender;
+    }else{
+        clearInterval(timer);
+        scoreRender();
+    }
+}
+
+// Start Quiz
+
+const start = document.getElementById("start");
+start.addEventListener("click", startQuiz);
+
+let timer;
+
+function startQuiz(){
+    start.style.display = "none";
+    counterRender();
+    timer = setInterval(counterRender,1000);
+    progressRender();
+    questionRender();
+    startQuiz.style.display = "block";
+}
+
+// Ternary operator
+
+if(Y == "one"){
+    X = 1;
+}else{
+    X = 0;
+}
+
+if(Y == "one"){
+    X = 1;
+}else if(Y == "zero"){
+    X = 0;
+}else{
+    X = 2;
+}
+
+// Score render
+
+function scoreRender(){
+    scoreContainer.style.display = "block";
+    let scorePerCent = Math.round(100 * score / question.length);
+    
 }
