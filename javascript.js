@@ -1,3 +1,19 @@
+// Start Quiz
+
+const start = document.getElementById("start");
+start.addEventListener("click", startQuiz);
+
+let timer;
+
+function startQuiz(){
+    start.style.display = "none";
+    counterRender();
+    timer = setInterval(counterRender,1000);
+    progressRender();
+    questionRender();
+    startQuiz.style.display = "block";
+}
+
 // Set-up question using Array
 
 let question = [{
@@ -54,10 +70,29 @@ let question = [{
     correct: "C"
 }];
 
-// Quiz Render
+// Select Elements
+
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const qImg = document.getElementById("qImg");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const choiceD = document.getElementById("D");
+const timer = document.getElementById("timer");
+const btimegauge = document.getElementById("btimegauge");
+const timegauge = document.getElementById("timegauge");
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
+
+
+// Variables
 
 let lastQuestionIndex = questions.length - 1;
 let runningQuestionIndex = 0;
+
+// Quiz Render
 
 function renderQuestions(){
     let q = questions[runningQuestionIndex];
@@ -68,9 +103,13 @@ function renderQuestions(){
     choiceD.innerHTML = q.choiceD;
 }
 
+start.style.display = "none";
+renderQuestions();
+quiz.style.display = "block";
+
 // Progress Render
 
-function progressRender(){;
+function renderProgress(){;
     for(let qIndex = 0; qIndex <= lastQuestionIndex; qIndex++){
         progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
     }
@@ -131,42 +170,34 @@ function checkAnswer(answer){
     }
 }
 
-// Start Quiz
 
-const start = document.getElementById("start");
-start.addEventListener("click", startQuiz);
-
-let timer;
-
-function startQuiz(){
-    start.style.display = "none";
-    counterRender();
-    timer = setInterval(counterRender,1000);
-    progressRender();
-    questionRender();
-    startQuiz.style.display = "block";
-}
 
 // Ternary operator
 
-if(Y == "one"){
-    X = 1;
-}else{
-    X = 0;
-}
+// if(Y == "one"){
+//     X = 1;
+// }else{
+//     X = 0;
+// }
 
-if(Y == "one"){
-    X = 1;
-}else if(Y == "zero"){
-    X = 0;
-}else{
-    X = 2;
-}
+// if(Y == "one"){
+//     X = 1;
+// }else if(Y == "zero"){
+//     X = 0;
+// }else{
+//     X = 2;
+// }
 
 // Score render
 
 function scoreRender(){
-    scoreContainer.style.display = "block";
+    scoreDiv.style.display = "block";
     let scorePerCent = Math.round(100 * score / question.length);
-    
+
+    let img = (scorePerCent >= 100) ? "img...." :
+              (scorePerCent >= 80) ? "img...." :
+              (scorePerCent >= 60) ? "img...." :
+
+    scoreDiv.innerHTML = "<img src="+ img +">";
+    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
 }
