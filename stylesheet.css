@@ -115,11 +115,11 @@ body{
     color: black;
 }
 
-.quiz-box .option-box{
+/* .quiz-box .option-box{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
+} */
 
 .quiz-box .option-box .options{
     background-color: burlywood;
@@ -135,6 +135,12 @@ body{
     border:2px solid black;
     border-radius: 30px;
     cursor: pointer;
+}
+
+.quiz-box .option-box .options.show-correct{
+    background-color: green;
+    border-color: darkgreen;
+    color: white;
 }
 
 .quiz-box .option-box .options.correct{
