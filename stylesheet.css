@@ -11,15 +11,36 @@ body{
 
 .custom-box{
     max-width: 800px;
-    background-color: aliceblue;
-    margin: 30px auto;
+    background-color: lightskyblue;
+    margin: 100px auto;
     padding: 50px 40 px;
-    border-radius: 10px;
+    border-radius: 30px;
+    padding-top: 30px;
+    border-style: solid;
 }
 
-.quiz-box h4{
+.home-box h4{
     text-align: center;
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 40px;
+    font-weight: 800;
     color: black;
 }
+
+.home-box{
+    text-align: center;
+}
+
+.btn{
+    background-color: ivory;
+    border-radius: 30px;
+    border-style: solid;
+    padding: 14px 15px;
+    color: blue;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 200px;
+    font-family: 'Patrick Hand', cursive;
+    cursor: pointer;
+}
+
+

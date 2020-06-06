@@ -9,9 +9,35 @@
     
 </head>
 <body>
-    <div class="quiz-box custom-box">
+    <div class="home-box custom-box">
         <h4>10 seconds for each question. Good Luck!</h4>
         <button type="button" class="start-btn btn">Start Quiz</button>
+    </div>
+
+    <div class="quiz-box custom-box">
+        <div class="stats">
+            <div class="timer">
+                <div class="remaining-time">10</div>
+            </div>
+            <div class="score">
+                <span class="score-text">Score</span>
+                <span class="correct-answer">0</span>
+            </div>
+        </div>
+        <div class="question-box">
+            <div class="current-question">
+                1
+        </div>
+        <div class="question-text">
+            What was the first Disney film that was produced in color?
+        </div>
+        <div class="option-box">
+            <div class="option">Cinderella</div>
+            <div class="option">Snow White and the Seven Dwafs</div>
+            <div class="option">Sleeping Beauty</div>
+            <div class="option">Pocahontas</div>
+
+        </div>
     </div>
         
         
@@ -22,9 +48,7 @@
         
         
         
-        <div id="start">Start Quiz</div>
-        <div id="quiz" style="display: none">
-            <div id="quesion"></div>
+        
             
             <div id="choices">
                 <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
