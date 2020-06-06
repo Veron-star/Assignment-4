@@ -1,179 +1,136 @@
 // Set-up question using Array
 
 const questionText = document.querySelector(".question-text");
-const questionIndex = document.querySelector(".question-index");
+const optionBox = document.querySelector(".option-box");
+const currentQuestion = document.querySelector(".current-question");
+const nextQuestionBtn = document.querySelector(".next-question-btn");
+const nextQuestion = document.querySelector(".next-question");
+const correctAnswer = document.querySelector(".correct-answer");
+const resultBtn = document.querySelector(".result-btn");
+const remainingTime = document.querySelector(".remaining-time");
+let questionIndex = 0;
+let score = 0;
+let number = 0;
 
 myApp = [{
     question:"What was the first Disney film that was produced in color?",
-    option:["Cinderella","Snow White and the Seven Dwafs","Sleeping Beauty","Pocahontas"],
+    options:["Cinderella","Snow White and the Seven Dwafs","Sleeping Beauty","Pocahontas"],
     answer:1,
 },
 
 {
     question:"What is celebrated on December 26th?",
-    option:["the day after Christmas","Harvest Day","Boxing Day","National Dog Day"],
+    options:["the day after Christmas","Harvest Day","Boxing Day","National Dog Day"],
     answer:2,
 },
 
 {
     question:"How many rings are there in the Olympic symbol?",
-    option:["5","7","4","9"],
+    options:["5","7","4","9"],
     answer:1,
 },
 
 {
     question:"How many time zones are there in the world?",
-    option:["7","24","23","9"],
+    options:["7","24","23","9"],
     answer:1,
 },
 
 {
     question:"Han Solo is a character from which movie series?",
-    option:["Harry Porter","Star Wars","Lord of the Rings","Indiana Jones"],
+    options:["Harry Porter","Star Wars","Lord of the Rings","Indiana Jones"],
     answer:1,
 },
 
 {
     question:"What is the longest river in the world?",
-    option:["Amazon","Congo","Nile","Hudson"],
+    options:["Amazon","Congo","Nile","Hudson"],
     answer:2,
 }];
 
-// Select Elements
+function load(){
+    number++;
+    questionText.innerHTML=myApp[questionIndex].question;
+    createOptions();
+    scoreBoard();
+    currentQuestion.innerHTML=number + myApp.length;
+}
 
-const questionBox = document.querySelector(".question-box");
-
-const optionBox = document.querySelector(".option-box");
-
-let questionCounter = 0;
-let curreQuestion;
-let availableQuestion = [];
-
-function setAvailableQuestion(){
-    const totalQuestion = quiz.length;
-    for(let i=0; i<totalQuestion; i++){
-        availableQuestion.push(quiz[i])
+function createOptions(){
+    optionBox.innerHTML="";
+    for(let i=0; i<myApp[questionIndex].options.length; i++){
+        const option=document.createElement("div");
+              option.innerHTML=myApp[questionIndex].options[i];
+              option.classList.add("options");
+              option.id=i;
+              option.setAttribute("onclick","check(this)");
+              optionBox.appendChild(option);
     }
 }
 
-function getNewQuestion(){
-
-}
-
-window.onload = function(){
-    setAvailableQuestion();
-    getNewQuestion();
-}
-
-
-
-
-// Quiz Render
-
-function renderQuestions(){
-    let q = questions[runningQuestionIndex];
-    question.innerHTML = "<p>" + q.question + "</p>";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    choiceC.innerHTML = q.choiceC;
-    choiceD.innerHTML = q.choiceD;
-}
-
-start.style.display = "none";
-renderQuestions();
-quiz.style.display = "block";
-
-// Progress Render
-
-function renderProgress(){;
-    for(let qIndex = 0; qIndex <= lastQuestionIndex; qIndex++){
-        progress.innerHTML += "<div class='prog' id=" + qIndex + "></div>";
-    }
-}
-
-function answerIsCorrect(){
-    document.getElementById(runningQuestionIndex).style.background = "green"
-}
-
-function answerIsWrong(){
-    document.getElementById(runningQuestionIndex).style.background = "red"
-}
-
-// Counter render
-
-const questionTime = 10; 
-const gaugeWidth = 150;
-let count = 0;
-const gaugeProgressUnit = gaugeWidth/questionTime;
-let timer = setInterval(counterRender,1000);
-
-function counterRender(){
-    if( count <= questionTime){
-        counterRender.innerHTML = count;
-        timeGauge.style.width = gaugeProgressUnit * count + "px";
-        count++;
-    }else{
-        count = 0;
-        answerIsWrong();
-        if( runningQuestionIndex < lastQuestionIndex){
-            runningQuestionIndex++;
-            questionRender();
-        }else{
-            clearInterval(timer);
-            scoreRender();
-        }
-    }
-}
-
-// checkAnswer();
-
-let score = 0;
-
-function checkAnswer(answer){
-    if(questions[runningQuestionIndex].correct == answer){
+function check(ele){
+    const id=ele.id;
+    if(id==myApp[questionIndex].answer){
+        ele.classList.add("correct");
         score++;
-        answerIsCorrect();
-    }else{
-        answerIsWrong();
+        scoreBoard();
     }
-    if(runningQuestionIndex < lastQuestionIndex){
-        count = 0;
-        runningQuestionIndex++;
-        questionRender;
-    }else{
-        clearInterval(timer);
-        scoreRender();
+    else{
+        ele.classList.add("incorrect");}
+
+        disableOptions()
+
+    if(number == myApp.length){
+        quiz-over();
     }
 }
 
+function startTimer(){
+    let timeLimit=10;
+    remainingTime.innerHTML=timeLimit;
+    interval=setInterval(()=>{
+        timeLimit--;
+        if(timeLimit < 3){
+            timeLimit="0"+timeLimit;
+        }
+        remainingTime.innerHTML=timeLimit;
+        if(timeLimit == 0){
+            clearInterval(interval);
+        }
+    },1000)
+}
+
+function disableOptions(){
+    for(let i=0; i<optionBox.children.length; i++){
+        optionBox.children[i].classList.add("you have answered");
+    }
+}
+
+function showNextQuestionBtn(){
+    nextQuestionBtn.classList.add("show");
+}
+
+function hideNextQuestion(){
+    nextQuestionBtn.classList.remove("show");
+}
+
+function scoreBoard(){
+    correctAnswer.innerHTML=score;
+}
+
+nextQuestionBtn.addEventListener("click",nextQuestion);
+
+function nextQuestion(){
+    load();
+    hideNextQuestionBtn();
+}
+
+function quizOver(){
+    nextQuestionBtn.classList.remove("show");
+    resultBtn.classList.add("show");
+}
 
 
-// Ternary operator
-
-// if(Y == "one"){
-//     X = 1;
-// }else{
-//     X = 0;
-// }
-
-// if(Y == "one"){
-//     X = 1;
-// }else if(Y == "zero"){
-//     X = 0;
-// }else{
-//     X = 2;
-// }
-
-// Score render
-
-function scoreRender(){
-    scoreDiv.style.display = "block";
-    let scorePerCent = Math.round(100 * score / question.length);
-
-    let img = (scorePerCent >= 100) ? "img...." :
-              (scorePerCent >= 80) ? "img...." :
-              (scorePerCent >= 60) ? "img...." :
-
-    scoreDiv.innerHTML = "<img src="+ img +">";
-    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+window.onload=()=>{
+    load();
 }
