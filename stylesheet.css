@@ -43,4 +43,72 @@ body{
     cursor: pointer;
 }
 
+.quiz-box{
+    background-color: mintcream;
+}
+
+.quiz-box .stats{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: green;
+}
+
+.quiz-box .stats .timer{
+    flex-basis: calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    text-align: left;
+}
+
+.quiz-box .stats .timer .remaining-time{
+    height: 60px;
+    width: 60px;
+    color: green;
+    border: 2px solid green;
+    font-weight: 800;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.quiz-box .stats .score{
+    flex-basis: calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    text-align: right;
+}
+
+.quiz-box .question-box{
+    background-color: mistyrose;
+    padding: 20px 15px;
+    margin: 20px 40px 20px 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 2px solid black;
+    text-align: center;
+    position: relative;
+}
+
+.quiz-box .question-box .current-question{
+    height: 50px;
+    width: 50px;
+    background-color: mistyrose;
+    border:2px solid black;
+    font-size: 30px;
+    font-weight: 800;
+    color: black;
+    border-radius: 50%;
+    line-height: 68px;
+    text-align: center;
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    margin-left: -35px;
+}
+
+.result-btn{
+    display: none;
+}
+
 
