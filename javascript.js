@@ -1,10 +1,7 @@
-// Set-up question using Array
-
 const questionText = document.querySelector(".question-text");
-const currentQuestion = document.querySelector(".current-question");
+const currentQuestionNum = document.querySelector(".current-question-number");
 const optionBox = document.querySelector(".option-box");
 const nextQuestionBtn = document.querySelector(".next-question-btn");
-const nextQuestion = document.querySelector(".next-question");
 const correctAnswer = document.querySelector(".correct-answer");
 const resultBtn = document.querySelector(".result-btn");
 const scoreText = document.querySelector(".score-text");
@@ -18,9 +15,8 @@ const startBtn = document.querySelector(".start-btn");
 let questionIndex = 0;
 let score = 0;
 let number = 0;
-let myApp = [];
 
-myApp = [{
+myApp=[{
     question:"What was the first Disney film that was produced in color?",
     options:["Cinderella","Snow White and the Seven Dwafs","Sleeping Beauty","Pocahontas"],
     answer:1,
@@ -57,17 +53,17 @@ myApp = [{
 }];
 
 function load(){
-    // number++;
+    number++;
     questionText.innerHTML=myApp[questionIndex].question;
     createOptions();
-    scoreText();
-    currentQuestion.innerHTML=number + myApp.length;
+    scoreText;
+    currentQuestionNum.innerHTML=number;
 }
 
 function createOptions(){
-    // optionBox.innerHTML="";
+    optionBox.innerHTML="";
     for(let i=0; i<myApp[questionIndex].options.length; i++){
-        const option=document.createElement("div");
+        const option = document.createElement("div");
               option.innerHTML=myApp[questionIndex].options[i];
               option.classList.add("option");
               option.id=i;
@@ -81,7 +77,7 @@ function check(ele){
     if(id==myApp[questionIndex].answer){
         ele.classList.add("correct");
         score++;
-        scoreText();
+        scoreBoard();
     }
     else{
         ele.classList.add("incorrect");
@@ -91,10 +87,10 @@ function check(ele){
             };
         }
     }
-    
-        disableOptions()
-        showNextQuestionBtn();
-        stopTimer();
+    // disableOptions()
+    showNextQuestionBtn();
+    startTimer();
+    stopTimer();
 
     if(number == myApp.length){
         quizOver();
@@ -116,45 +112,56 @@ function startTimer(){
     },1000)
 }
 
-function disableOptions(){
-    for(let i=0; i<questionBox.children.length; i++){
-        questionBox.children[i].classList.add("you have answered");
-    }
+function stopTimer(){
+    clearInterval(interval);
 }
+
+
+// function disableOptions(){
+//     for(let i=0; i<optionBox.children.length; i++){
+//         optionBox.children[i].classList.add("you-have answered");
+//     }
+// }
 
 function showNextQuestionBtn(){
     nextQuestionBtn.classList.add("show");
 }
 
-function hideNextQuestion(){
-    nextQuestionBtn.classList.remove("show");
-}
+// function hideNextQuestion(){
+//     nextQuestionBtn.classList.remove("show");
+// }
 
 function scoreBoard(){
     correctAnswer.innerHTML=score;
 }
 
-nextQuestionBtn.addEventListener("click",nextQuestion);
+nextQuestionBtn.addEventListener("click", nextQuestion);
 
-// function nextQuestion(){
-//     hideNextQuestionBtn();
-//     startTimer();
-// }
+function nextQuestion(){
+    questionIndex++;
+    load();
+    // hideNextQuestionBtn();
+    startTimer();
+    stopTimer();
+}
+
+// resultBtn.addEventListener("click", quizResult)
+//     quizBox.style.display="none";
+//     quizOverBox.classList.add("show");
+// })
 
 function quizResult(){
     document.querySelector(".total-questions").innerHTML=myApp.length;
-    document.querySelector(".score:").innerHTML=myApp.length;
-    document.querySelector(".correct:").innerHTML=score;
-    document.querySelector(".wrong:").innerHTML=score;
+    document.querySelector(".correct").innerHTML=score;
+    document.querySelector(".wrong").innerHTML=score;
     const percentage=(score/myApp.length)*100;
-    document.querySelector(".percentage:").innerHTML=percentage.toFixed(2) + "%";
+    document.querySelector(".percentage").innerHTML=percentage.toFixed(2) + "%";
 }
 
 function resetQuiz(){
-    
+    questionIndex = 0;
     score = 0;
     number = 0;
-    myApp = [];
 }
 
 function quizOver(){
@@ -164,6 +171,7 @@ function quizOver(){
 
 resultBtn.addEventListener("click",()=>{
     quizBox.style.display="none";
+    quizBox.classList.remove("show");
     resultBtn.classList.remove("show");
     quizOverBox.classList.add("show");
     quizResult();
@@ -173,10 +181,14 @@ tryAgainBtn.addEventListener("click", ()=>{
     quizBox.classList.add("show");
     quizOverBox.classList.remove("show");
     resetQuiz();
-    // nextQuestion();
+    nextQuestion();
 })
 
-startBtn.addEventListener("click",()=>{
+startBtn.addEventListener("click", ()=>{
     quizBox.classList.add("show");
     startTimer();
 })
+
+window.onload=()=>{
+    load();
+}

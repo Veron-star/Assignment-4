@@ -41,6 +41,11 @@ body{
     font-weight: 200px;
     font-family: 'Patrick Hand', cursive;
     cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn:focus{
+    outline: none;
 }
 
 .quiz-box{
@@ -81,6 +86,10 @@ body{
     margin-right: 40px;
 }
 
+.quiz-box .stats .score .correct-answer{
+    font-weight: 800;
+}
+
 .quiz-box .question-box{
     background-color: mistyrose;
     padding: 20px 15px;
@@ -92,7 +101,7 @@ body{
     position: relative;
 }
 
-.quiz-box .question-box .current-question{
+.quiz-box .question-box .current-question-number{
     height: 50px;
     width: 50px;
     background-color: mistyrose;
@@ -115,13 +124,13 @@ body{
     color: black;
 }
 
-/* .quiz-box .option-box{
+.quiz-box .option-box{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-} */
+}
 
-.quiz-box .option-box .options{
+.quiz-box .option-box .option{
     background-color: burlywood;
     flex-basis: calc(50% - 20px);
     max-width: calc(50% - 20px);
@@ -137,33 +146,57 @@ body{
     cursor: pointer;
 }
 
-.quiz-box .option-box .options.show-correct{
+.quiz-box .option-box .option.show-correct{
     background-color: green;
     border-color: darkgreen;
-    color: white;
+    color: black;
 }
 
-.quiz-box .option-box .options.correct{
+.quiz-box .option-box .option.correct{
     background-color: green;
     border-color: darkgreen;
-    color: white;
+    color: black;
 }
 
-.quiz-box .option-box .options.incorrect{
+.quiz-box .option-box .option.correct::before{
+    content: '';
+    position: absolute;
+    background-color: green;
+    height: 30px;
+    width: 30px;
+}
+
+/* .quiz-box .option-box .option.you-have-answered{
+    pointer-events: none;
+} */
+
+.quiz-box .option-box .option.incorrect{
     background-color: red;
     border-color: darkred;
-    color: white;
+    color: black
+}
+
+.quiz-box .option-box .option.incorrect::before{
+    content: '';
+    position: absolute;
+    background-color: red;
+    height: 30px;
+    width: 30px;
+}
+
+.quiz-box.show{
+    display: block;
 }
 
 .quiz-box .next-question{
     margin-top: 20px;
     text-align: center;
 }
-.result-btn,.next-question-btn{
+.result-btn .next-question-btn{
     display: none;
 }
 
-.result-btn.show,.next-question-btn.show{
+.result-btn.show .next-question-btn.show{
     display: block;
 }
 
@@ -184,6 +217,10 @@ body{
 .quiz-over-box h4 span{
     font-weight: 800;
     color: black;
+}
+
+.quiz-over-box.show{
+    display: block;
 }
 
 .try-again-btn{
