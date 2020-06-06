@@ -1,95 +1,72 @@
-// Start Quiz
-
-const start = document.getElementById("start");
-start.addEventListener("click", startQuiz);
-
-let timer;
-
-function startQuiz(){
-    start.style.display = "none";
-    counterRender();
-    timer = setInterval(counterRender,1000);
-    progressRender();
-    questionRender();
-    startQuiz.style.display = "block";
-}
-
 // Set-up question using Array
 
-let question = [{
-    question1: "What was the first Disney film that was produced in color?",
-    choiceA: "Cinderella",
-    choiceB: "Snow White and the Seven Dwafs",
-    choiceC: "Sleeping Beauty",
-    choiceD: "Pocahontas",
-    correct: "B"
+const questionText = document.querySelector(".question-text");
+const questionIndex = document.querySelector(".question-index");
+
+myApp = [{
+    question:"What was the first Disney film that was produced in color?",
+    option:["Cinderella","Snow White and the Seven Dwafs","Sleeping Beauty","Pocahontas"],
+    answer:1,
 },
 
 {
-    question2: "What is celebrated on December 26th?",
-    choiceA: "the day after Christmas",
-    choiceB: "Harvest Day",
-    choiceC: "Boxing Day",
-    choiceD: "National Dog Day",
-    correct: "C"
+    question:"What is celebrated on December 26th?",
+    option:["the day after Christmas","Harvest Day","Boxing Day","National Dog Day"],
+    answer:2,
 },
 
 {
-    question3: "How many rings are there in the Olympic symbol?",
-    choiceA: "5",
-    choiceB: "7",
-    choiceC: "4",
-    choiceD: "9",
-    correct: "7"
+    question:"How many rings are there in the Olympic symbol?",
+    option:["5","7","4","9"],
+    answer:1,
 },
 
 {
-    question4: "How many time zones are there in the world?",
-    choiceA: "7",
-    choiceB: "24",
-    choiceC: "23",
-    choiceD: "9",
-    correct: "B"
+    question:"How many time zones are there in the world?",
+    option:["7","24","23","9"],
+    answer:1,
 },
 
 {
-    question5: "Han Solo is a character from which movie series?",
-    choiceA: "Harry Porter",
-    choiceB: "Star Wars",
-    choiceC: "Lord of the Rings",
-    choiceD: "Indiana Jones",
-    correct: "B"
+    question:"Han Solo is a character from which movie series?",
+    option:["Harry Porter","Star Wars","Lord of the Rings","Indiana Jones"],
+    answer:1,
 },
 
 {
-    question6: "What is the longest river in the world?",
-    choiceA: "Amazon",
-    choiceB: "Congo",
-    choiceC: "Nile",
-    choiceD: "Hudson",
-    correct: "C"
+    question:"What is the longest river in the world?",
+    option:["Amazon","Congo","Nile","Hudson"],
+    answer:2,
 }];
 
 // Select Elements
 
-const start = document.getElementById("start");
-const quiz = document.getElementById("quiz");
-const question = document.getElementById("question");
-const choiceA = document.getElementById("A");
-const choiceB = document.getElementById("B");
-const choiceC = document.getElementById("C");
-const choiceD = document.getElementById("D");
-const timer = document.getElementById("timer");
-const btimegauge = document.getElementById("btimegauge");
-const timegauge = document.getElementById("timegauge");
-const progress = document.getElementById("progress");
-const scoreDiv = document.getElementById("scoreContainer");
+const questionBox = document.querySelector(".question-box");
+
+const optionBox = document.querySelector(".option-box");
+
+let questionCounter = 0;
+let curreQuestion;
+let availableQuestion = [];
+
+function setAvailableQuestion(){
+    const totalQuestion = quiz.length;
+    for(let i=0; i<totalQuestion; i++){
+        availableQuestion.push(quiz[i])
+    }
+}
+
+function getNewQuestion(){
+
+}
+
+window.onload = function(){
+    setAvailableQuestion();
+    getNewQuestion();
+}
 
 
-// Variables
 
-let lastQuestionIndex = questions.length - 1;
-let runningQuestionIndex = 0;
 
 // Quiz Render
 
